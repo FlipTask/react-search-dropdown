@@ -116,11 +116,11 @@ export default class SearchBox extends Component {
     onBlur = () => {
         setTimeout(() => {
             this.setState({
-                // openList: false,
+                openList: false,
                 activeOptionIndex: -1,
                 possibleSelection: {},
                 search: "",
-                // isfocused: false
+                isfocused: false
             })
         }, 500);
     }
