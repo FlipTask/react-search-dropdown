@@ -1,6 +1,6 @@
 {
   "name": "react-search-dropdown",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "React searchable autocomplete bar. Its a replica of youtube's search, which tracks mouse cursor and arrow keys for navigate over search results",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
