@@ -1,6 +1,7 @@
 # @fliptask/react-search-dropdown
 ![React-Search-Dropdown](https://i.imgur.com/4SkACVY.png)
 ![React-Search-Dropdown](https://i.imgur.com/g1tDNLd.png)
+</br>
 Searchable autocomplete dropdown for [React](https://reactjs.org/). 
 
 See [fliptask.github.io/react-search-dropdown]() for live demo.
@@ -78,7 +79,6 @@ class ProductList extends Component{
 ```
 
 ## Props
-____
 
 PropName | Default value(s) | Description
 ---------|---------|------------
@@ -92,7 +92,6 @@ className | null | provided className will be added in the `searchbox` node.
 placeholder | default string | Pass custom placeholder otherwise default will be shown.
 
 ## Methods
-____
 
 Method Name | Return value
 ------------|-------------
