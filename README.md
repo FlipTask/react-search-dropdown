@@ -11,11 +11,11 @@ See [fliptask.github.io/react-search-dropdown]() for live demo.
 The easiest way to use **react-search-dropdown** is to install it from npm and build it into your app with Webpack.
 
 ```
-yarn add react-search-drodown
+yarn add @fliptask/react-search-drodown
 ```
 OR
 ```
-npm install react-search-dropdown
+npm install @fliptask/react-search-dropdown
 ```
 Then use it in your app :
 
