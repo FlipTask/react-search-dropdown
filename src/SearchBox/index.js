@@ -33,13 +33,17 @@ export default class SearchBox extends Component {
             document.getElementsByTagName('head')[0].appendChild(tag)
         }
     }
+
     static getDerivedStateFromProps = (props, state) => {
         if(props.options && (props.options.length !== state.list.length)){
             return {
                 ...state,
                 list: props.options,
-                search: props.value !== state.search ? props.value : state.search, 
                 searchKeys: props.searchKeys ? props.searchKeys : (props.options.length > 0 ? Object.keys(props.options[0]): [])
+            }
+        }else if(props.value !== state.search) {
+            return {
+                search: props.value
             }
         }
         return null;
@@ -86,6 +90,12 @@ export default class SearchBox extends Component {
                 : false,
             list: list
         });
+        if(this.props.onChange) {
+            this.props.onChange({
+                search: e.target.value,
+                list
+            })
+        }
     };
     navigateOnList = (e) => {
         const downKey = 40;
@@ -137,31 +147,20 @@ export default class SearchBox extends Component {
             highlightSearchText = true
         } = this.props;
         const optionList = this.props.options || list;
-        const matchedList = optionList.filter((option) => {
-            return Object.keys(option).reduce((acc, key) => {
-                let val = option[key];
-                if(typeof val === "number") {
-                    val = `${val}`;
-                }
-                if(val.includes(this.state.search)) {
-                    acc = true;
-                }
-                return acc;
-            }, false);
-        });
+        const matchedList = optionList;
         return (
             <div className={`searchbox ${isfocused ? "focused" : ""} ${openList ? "selectable" : ""} ${this.props.className || ""}`}>
                 <div className="input-box">
                     <SearchSvg />
                     <input
-                        onFocus={this.props.onChange || this.onFocus}
+                        onFocus={this.onFocus}
                         onBlur={this.props.onBlur || this.onBlur}
                         onKeyUp={this.props.onKeyUp || this.navigateOnList}
                         value={search}
                         type="text"
                         placeholder={this.props.placeholder || `Search Results by ${this.state.searchKeys.join(", ")}...`}
                         name="search"
-                        onChange={this.props.onChange || this.onChange}
+                        onChange={this.onChange}
                     />
                 </div>
                 {openList
