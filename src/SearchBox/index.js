@@ -38,6 +38,7 @@ export default class SearchBox extends Component {
             return {
                 ...state,
                 list: props.options,
+                search: props.value !== state.search ? props.value : state.search, 
                 searchKeys: props.searchKeys ? props.searchKeys : (props.options.length > 0 ? Object.keys(props.options[0]): [])
             }
         }
