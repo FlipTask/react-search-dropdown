@@ -32,29 +32,32 @@ export default({
     searchKeys,
     onSelected,
     highlightSearchText
-}) => (
-    <div
-        onClick={(e) => {
-            console.log("click");
-            e.stopPropagation();
-            onSelected(e, data);
-        }}
-        className={`search-list--item ${data.id === selected.id ? "active" : ""}`}
-        onMouseEnter={(e) => onMouseEnter(e, data, index)}
-    >
-        {
-            searchKeys.map((id, i) => {
-                return (
-                    <div className="meta-info" data-id={id} key={i}>
-                        {
-                            highlightSearchText ?
-                            getHighlightedText(Array.isArray(data[id]) ? data[id].join(",") : data[id], searchString)
-                            :
-                            Array.isArray(data[id]) ? data[id].join(",") : data[id]
-                        }
-                    </div>
-                )
-            })
-        }
-    </div>
-)
+}) => {
+    return (
+        <React.Fragment>
+            <div
+                onClick={(e) => {
+                    e.stopPropagation();
+                    onSelected(e, data);
+                }}
+                className={`search-list--item ${data.id === selected.id ? "active" : ""}`}
+                onMouseEnter={(e) => onMouseEnter(e, data, index)}
+            >
+                {
+                    searchKeys.map((id, i) => {
+                        return (
+                            <div className="meta-info" data-id={id} key={i}>
+                                {
+                                    highlightSearchText ?
+                                    getHighlightedText(Array.isArray(data[id]) ? data[id].join(",") : data[id], searchString)
+                                    :
+                                    Array.isArray(data[id]) ? data[id].join(", ") : data[id]
+                                }
+                            </div>
+                        )
+                    })
+                }
+            </div> 
+        </React.Fragment>
+    )
+}

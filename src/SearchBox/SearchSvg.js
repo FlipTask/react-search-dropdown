@@ -9,6 +9,8 @@ export default() => (
         xmlnsXlink="http://www.w3.org/1999/xlink"
         x="0px"
         y="0px"
+        height="16"
+        width="16"
         viewBox="0 0 511.999 511.999"
         style={{
         enableBackground: "new 0 0 511.999 511.999"

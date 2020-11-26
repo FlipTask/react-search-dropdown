@@ -15,7 +15,7 @@ export default class SearchBox extends Component {
             openList: props.open || false,
             selected: props.selected || {},
             list: props.list || [],
-            searchKeys: props.searchKeys || []
+            searchKeys: props.searchKeys || (openList.length > 0 ? Object.keys(openList[0]): [])
         };
     }
     componentWillUnmount () {
@@ -114,15 +114,15 @@ export default class SearchBox extends Component {
         })
     }
     onBlur = () => {
-        setTimeout(() => {
-            this.setState({
-                openList: false,
-                activeOptionIndex: -1,
-                possibleSelection: {},
-                search: "",
-                isfocused: false
-            })
-        }, 500);
+        // setTimeout(() => {
+        //     this.setState({
+        //         openList: false,
+        //         activeOptionIndex: -1,
+        //         possibleSelection: {},
+        //         search: "",
+        //         isfocused: false
+        //     })
+        // }, 500);
     }
     render() {
         const {
@@ -136,6 +136,18 @@ export default class SearchBox extends Component {
             highlightSearchText = true
         } = this.props;
         const optionList = this.props.options || list;
+        const matchedList = optionList.filter((option) => {
+            return Object.keys(option).reduce((acc, key) => {
+                let val = option[key];
+                if(typeof val === "number") {
+                    val = `${val}`;
+                }
+                if(val.includes(this.state.search)) {
+                    acc = true;
+                }
+                return acc;
+            }, false);
+        });
         return (
             <div className={`searchbox ${isfocused ? "focused" : ""} ${openList ? "selectable" : ""} ${this.props.className || ""}`}>
                 <div className="input-box">
@@ -146,7 +158,7 @@ export default class SearchBox extends Component {
                         onKeyUp={this.props.onKeyUp || this.navigateOnList}
                         value={search}
                         type="text"
-                        placeholder={this.props.placeholder || `Search users by ${this.state.searchKeys.join(", ")}...`}
+                        placeholder={this.props.placeholder || `Search Results by ${this.state.searchKeys.join(", ")}...`}
                         name="search"
                         onChange={this.props.onChange || this.onChange}
                     />
@@ -159,9 +171,9 @@ export default class SearchBox extends Component {
                             }}
                         >
                             {
-                                optionList.length > 0 ?
+                                matchedList.length > 0 ?
                                 
-                                optionList.map((obj, i) => {
+                                matchedList.map((obj, i) => {
                                     return <SearchItem
                                         highlightSearchText={highlightSearchText}
                                         onSelected={this.props.onSelected}
@@ -177,7 +189,7 @@ export default class SearchBox extends Component {
                                 :
                                 <div className="search-list-item">
                                     <p className="placeholder-no-items">
-                                        No User Found
+                                        No Result Found
                                     </p>
                                 </div>
                             }
