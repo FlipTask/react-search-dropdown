@@ -1,6 +1,6 @@
 {
   "name": "@fliptask/react-search-dropdown",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "React searchable autocomplete bar. Its a replica of youtube's search, which tracks mouse cursor and arrow keys for navigate over search results",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
